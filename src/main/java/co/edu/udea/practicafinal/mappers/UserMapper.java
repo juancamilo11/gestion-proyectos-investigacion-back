@@ -1,12 +1,8 @@
 package co.edu.udea.practicafinal.mappers;
 
 import co.edu.udea.practicafinal.dtos.UserDto;
-import co.edu.udea.practicafinal.dtos.helpers.EnumRoles;
 import co.edu.udea.practicafinal.entities.User;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 
 @Component
 public class UserMapper {

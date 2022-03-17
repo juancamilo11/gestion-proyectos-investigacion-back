@@ -1,8 +1,7 @@
 package co.edu.udea.practicafinal.dtos;
 
-import co.edu.udea.practicafinal.dtos.helpers.EnumRoles;
+import co.edu.udea.practicafinal.dtos.helpers.EnumRolesDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +22,7 @@ public class UserDto {
   @NotBlank private String email;
   @NotBlank private String photoURL;
   @NotBlank private String phoneNumber;
-  @NotBlank private EnumRoles role;
+  @NotBlank private EnumRolesDto role;
 
   @DateTimeFormat(style = "yyyy-MM-dd")
   private LocalDate dateOfEntry;

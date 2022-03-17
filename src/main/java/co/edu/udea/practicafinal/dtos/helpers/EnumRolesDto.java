@@ -1,13 +1,13 @@
 package co.edu.udea.practicafinal.dtos.helpers;
 
-public enum EnumRoles {
+public enum EnumRolesDto {
   RESEARCHER("Investigador"),
   RESEARCH_LEADER("Lider de Investigador"),
   ADMINISTRATOR("Administrador");
 
   private String description;
 
-  EnumRoles(String description) {
+  EnumRolesDto(String description) {
     this.description = description;
   }
 

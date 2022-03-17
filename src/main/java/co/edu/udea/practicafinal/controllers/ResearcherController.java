@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UserController {
+public class ResearcherController {
   private final UserService userService;
 
   @Autowired
-  public UserController(UserService userService) {
+  public ResearcherController(UserService userService) {
     this.userService = userService;
   }
 
