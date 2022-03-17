@@ -1,6 +1,6 @@
 package co.edu.udea.practicafinal.controllers;
 
-import co.edu.udea.practicafinal.dtos.UserDto;
+import co.edu.udea.practicafinal.dtos.ResearcherDto;
 import co.edu.udea.practicafinal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class ResearcherController {
   }
 
   @PostMapping("/post/user")
-  public ResponseEntity<UserDto> createNewUser(@RequestBody UserDto userDto) {
-    return new ResponseEntity<UserDto>(this.userService.createNewUser(userDto), HttpStatus.OK);
+  public ResponseEntity<ResearcherDto> createNewUser(@RequestBody ResearcherDto researcherDto) {
+    return new ResponseEntity<ResearcherDto>(this.userService.createNewUser(researcherDto), HttpStatus.OK);
   }
 }

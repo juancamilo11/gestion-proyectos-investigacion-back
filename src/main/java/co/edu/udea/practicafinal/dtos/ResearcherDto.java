@@ -20,12 +20,12 @@ import java.util.List;
 public class ResearcherDto {
 
     @NotBlank private String id;
-    @NotBlank private String name;
+    @NotBlank private String displayName;
     @NotBlank private String email;
-    @NotBlank private String photoPerfil;
-    @NotBlank private String phone;
-    @NotBlank private LocalDate dateAdmission;
-    @NotBlank private EnumRolesDto rol;
+    @NotBlank private String photoURL;
+    @NotBlank private String phoneNumber;
+    @NotBlank private LocalDate dateOfEntry;
+    @NotBlank private EnumRolesDto role;
     @NotBlank private CareerDto career;
 
 

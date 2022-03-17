@@ -1,7 +1,7 @@
 package co.edu.udea.practicafinal.services;
 
-import co.edu.udea.practicafinal.dtos.UserDto;
+import co.edu.udea.practicafinal.dtos.ResearcherDto;
 
 public interface UserService {
-  UserDto createNewUser(final UserDto userDto);
+  ResearcherDto createNewUser(ResearcherDto researcherDto);
 }

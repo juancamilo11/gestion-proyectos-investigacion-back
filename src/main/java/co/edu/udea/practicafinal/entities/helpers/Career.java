@@ -1,17 +1,16 @@
-package co.edu.udea.practicafinal.dtos.helpers;
+package co.edu.udea.practicafinal.entities.helpers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class CareerDto {
+public class Career {
     private String name;
     private String code;
 
