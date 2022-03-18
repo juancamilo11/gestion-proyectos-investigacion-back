@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: book-api
+  jpa:
+    show-sql: true
+    hibernate:
+      default_schema: public
+      ddl-auto: create
+    properties:
+      hibernate:
+        order_inserts: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 50
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/db_postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password123
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 5
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+
+app:
+  cors:
+    allowed-origins: http://localhost:3000

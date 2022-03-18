@@ -1,0 +1,34 @@
+spring:
+  jpa:
+    #defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      default_schema: public
+      ddl-auto: update
+    properties:
+      hibernate:
+        order_inserts: true
+        dialect: org.hibernate.dialect.H2Dialect
+        jdbc:
+          batch_size: 50
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  h2:
+    console.enabled: true #http://localhost:8080/h2-console
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:gradestestdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 5
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
