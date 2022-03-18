@@ -24,14 +24,14 @@ public class Researcher {
     @Id
     @Column(name = "researcher_id")
     @NotBlank private String id;
-    @NotBlank private String name;
+    @NotBlank private String displayName;
     @NotBlank private String email;
-    @NotBlank private String photoUrl;
-    @NotBlank private String phone;
-    @NotBlank private LocalDate dateAdmission;
-    @NotBlank private EnumRoles rol;
-    @NotBlank private String careerName;
-    @NotBlank private String careerCode;
+    @NotBlank private String photoURl;
+     private String phoneNumber;
+     private LocalDate dateOfEntry;
+     private EnumRoles role;
+     private String careerName;
+     private String careerCode;
 
     @ManyToMany
     @JoinTable(name = "researcher_research_project_detail",

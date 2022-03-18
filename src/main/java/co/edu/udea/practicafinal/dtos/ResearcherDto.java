@@ -19,14 +19,18 @@ import java.util.List;
 @NoArgsConstructor
 public class ResearcherDto {
 
-    @NotBlank private String id;
-    @NotBlank private String displayName;
-    @NotBlank private String email;
-    @NotBlank private String photoURL;
-    @NotBlank private String phoneNumber;
-    @NotBlank private LocalDate dateOfEntry;
-    @NotBlank private EnumRolesDto role;
-    @NotBlank private CareerDto career;
+    @NotBlank
+    private String id;
+    @NotBlank
+    private String displayName;
+    @NotBlank
+    private String email;
+    @NotBlank
+    private String photoURL;
+    private String phoneNumber;
+    private LocalDate dateOfEntry;
+    private EnumRolesDto role;
+    private CareerDto career;
 
 
     private List<ResearchProjectDto> researchProjectList;
