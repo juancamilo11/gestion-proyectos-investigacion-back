@@ -24,6 +24,4 @@ public class Objective {
     @NotBlank private String id;
     @NotBlank private String description;
     @NotBlank private Boolean completed;
-
-
 }

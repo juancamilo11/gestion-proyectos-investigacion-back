@@ -1,12 +1,15 @@
 package co.edu.udea.practicafinal.entities;
 
 
+import co.edu.udea.practicafinal.entities.helpers.ProjectDuration;
+import co.edu.udea.practicafinal.entities.helpers.ProjectObjective;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -16,23 +19,14 @@ import java.util.List;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name= "research_project")
+@Document
 public class ResearchProject {
     @Id
-    @Column(name = "project_id")
     @NotBlank private String id;
     @NotBlank private String name;
-    @NotBlank private String budget;
-
-    @NotBlank private String generalObjective;
-
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "id")
-    @NotBlank private List<Objective> specificObjective;
-
-    @ManyToMany(mappedBy = "researchProjectList")
+    @NotBlank private Double budget;
+    @NotBlank private String description;
+    @NotBlank private ProjectObjective projectObjective;
     @NotEmpty private List<Researcher> researcherList;
-
-
+    @NotEmpty private ProjectDuration projectDuration;
 }
