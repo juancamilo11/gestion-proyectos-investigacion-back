@@ -18,5 +18,4 @@ import java.util.List;
 public class ProjectObjectiveDto {
     @NotBlank private String generalObjective;
     @NotBlank private List<ObjectiveDto> specificObjectiveList;
-
 }

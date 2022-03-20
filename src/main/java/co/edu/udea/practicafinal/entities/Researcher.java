@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,12 +17,9 @@ import java.util.List;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="researcher")
 public class Researcher {
 
     @Id
-    @Column(name = "researcher_id")
     @NotBlank private String id;
     @NotBlank private String displayName;
     @NotBlank private String email;
@@ -32,11 +29,4 @@ public class Researcher {
      private EnumRoles role;
      private String careerName;
      private String careerCode;
-
-    @ManyToMany
-    @JoinTable(name = "researcher_research_project_detail",
-            joinColumns = @JoinColumn(name = "researcher_id"),
-            inverseJoinColumns = @JoinColumn(name="project_id"))
-    private List<ResearchProject> researchProjectList;
-
 }

@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -19,9 +20,9 @@ import javax.validation.constraints.NotBlank;
 public class ResearchProjectDto {
     @NotBlank private String id;
     @NotBlank private String name;
-    @NotBlank private String budget;
+    @NotBlank private Double budget;
     @NotBlank private ProjectObjectiveDto projectObjective;
     @NotBlank private ProjectDurationDto projectDuration;
-
-
+    @NotBlank private String description;
+    @NotBlank private List<ResearcherDto> researcherDtoList;
 }
