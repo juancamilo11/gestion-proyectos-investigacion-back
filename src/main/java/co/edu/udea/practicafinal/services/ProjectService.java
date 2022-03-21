@@ -9,4 +9,6 @@ public interface ProjectService {
   List<ResearcherDto> getAllResearchersByProjectId(String projectId);
 
     List<ResearchProjectDto> getAllProjectsByResearcherId(String researcherId);
+
+  ResearchProjectDto createNewProject(ResearchProjectDto researchProjectDto);
 }

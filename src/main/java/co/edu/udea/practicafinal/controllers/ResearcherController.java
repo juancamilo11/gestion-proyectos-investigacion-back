@@ -31,17 +31,10 @@ public class ResearcherController {
     return new ResponseEntity<>(this.userService.checkUserExistence(basicResearcherInfoDto), HttpStatus.OK);
   }
 
-  @GetMapping("/get/projects/user/{researcherId}")
-  public ResponseEntity<List<ResearchProjectDto>> getAllProjectsByResearcherId(@PathVariable String researcherId) {
-    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllProjectsByResearcherId del controlador Researcher " + researcherId);
-    return new ResponseEntity<>(this.projectService.getAllProjectsByResearcherId(researcherId), HttpStatus.OK);
-  }
-
   @GetMapping("/get/users/project/{projectId}")
   public ResponseEntity<List<ResearcherDto>> getAllResearchersByProjectId(@PathVariable String projectId) {
     log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllResearchersByProjectId del controlador Researcher con Id" + projectId);
     return new ResponseEntity<>(this.projectService.getAllResearchersByProjectId(projectId), HttpStatus.OK);
   }
-
 
 }

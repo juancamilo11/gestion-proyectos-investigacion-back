@@ -1,6 +1,9 @@
 package co.edu.udea.practicafinal.services;
 
 import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.BasicResearcherInfoDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.CareerDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.EnumRolesDto;
 import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.entities.ResearchProject;
 import co.edu.udea.practicafinal.entities.Researcher;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,19 +33,31 @@ public class ProjectServicesImpl implements ProjectService {
     @Override
     public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
 
-        List<ResearcherDto> researcherDtoList = new ArrayList<>();
         Optional<ResearchProject> projectOptional = this.projectRepository
               .findById(projectId);
 
-        projectOptional.map(researchProject -> researchProject.getResearcherIdList()
+        return projectOptional.map(researchProject -> researchProject.getResearcherIdList()
                         .stream()
-                        .peek(researcherId -> {
+                        .map(researcherId -> {
                             Optional<Researcher> researcherOptional = this.researcherRepository.findById(researcherId);
-                            researcherOptional.ifPresent(researcher -> researcherDtoList
-                                    .add(this.researcherMapper.mapFromEntityToDto(researcher)));
-                        }).collect(Collectors.toList()));
+                            return researcherOptional.map(researcher -> ResearcherDto.builder()
+                                    .basicResearcherInfo(BasicResearcherInfoDto.builder()
+                                            .id(researcher.getId())
+                                            .displayName(researcher.getDisplayName())
+                                            .email(researcher.getEmail())
+                                            .photoURL(researcher.getPhotoURl())
+                                            .build())
+                                    .phoneNumber(researcher.getPhoneNumber())
+                                    .dateOfEntry(researcher.getDateOfEntry())
+                                    .role(EnumRolesDto.valueOf(researcher.getRole().getDescription()))
+                                    .career(CareerDto.builder()
+                                            .name(researcher.getCareer().getName())
+                                            .code(researcher.getCareer().getCode())
+                                            .build())
+                                    .build()).orElse(null);
+                        }).collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
 
-        return researcherDtoList;
     }
 
     @Override
@@ -51,5 +67,12 @@ public class ProjectServicesImpl implements ProjectService {
                 .stream()
                 .map(this.projectMapper::mapFromEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ResearchProjectDto createNewProject(ResearchProjectDto researchProjectDto) {
+        return this.projectMapper
+                .mapFromEntityToDto(this.projectRepository
+                        .save(this.projectMapper.mapFromDtoToEntity(researchProjectDto)));
     }
 }
