@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Objective {
-    @NotBlank private String id;
-    @NotBlank private String description;
-    @NotBlank private Boolean completed;
+    private String id;
+    private String description;
+    private Boolean completed;
 }

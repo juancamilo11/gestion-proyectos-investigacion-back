@@ -1,37 +1,47 @@
 package co.edu.udea.practicafinal.controllers;
 
-import co.edu.udea.practicafinal.dtos.ResearcherDto;
+import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.BasicResearcherInfoDto;
+import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.services.ProjectService;
 import co.edu.udea.practicafinal.services.UserService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1")
-@Log
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
+@Log
 public class ResearcherController {
   private final UserService userService;
   private final ProjectService projectService;
 
+  //En uso
   @PostMapping("/post/user")
-  public ResponseEntity<ResearcherDto> createNewUser(@RequestBody ResearcherDto researcherDto) {
-    log.log(Level.INFO, "Ingresando al metodo del controlador Researcher "+researcherDto);
-    return new ResponseEntity<>(this.userService.createNewUser(researcherDto), HttpStatus.OK);
+  public ResponseEntity<ResearcherDto> checkUserExistence(@RequestBody BasicResearcherInfoDto basicResearcherInfoDto) {
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo createNewUser del controlador Researcher " + basicResearcherInfoDto);
+    return new ResponseEntity<>(this.userService.checkUserExistence(basicResearcherInfoDto), HttpStatus.OK);
+  }
+
+  @GetMapping("/get/projects/user/{researcherId}")
+  public ResponseEntity<List<ResearchProjectDto>> getAllProjectsByResearcherId(@PathVariable String researcherId) {
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllProjectsByResearcherId del controlador Researcher " + researcherId);
+    return new ResponseEntity<>(this.projectService.getAllProjectsByResearcherId(researcherId), HttpStatus.OK);
   }
 
   @GetMapping("/get/users/project/{projectId}")
   public ResponseEntity<List<ResearcherDto>> getAllResearchersByProjectId(@PathVariable String projectId) {
-    log.log(Level.INFO, "Ingresando al metodo del controlador \"getAllResearchersByProjectId\": " + projectId);
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllResearchersByProjectId del controlador Researcher con Id" + projectId);
     return new ResponseEntity<>(this.projectService.getAllResearchersByProjectId(projectId), HttpStatus.OK);
   }
+
+
 }

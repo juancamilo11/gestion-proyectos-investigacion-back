@@ -1,8 +1,8 @@
 package co.edu.udea.practicafinal.services;
 
-import co.edu.udea.practicafinal.dtos.ResearcherDto;
-import java.util.List;
+import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.BasicResearcherInfoDto;
 
 public interface UserService {
-  ResearcherDto createNewUser(ResearcherDto researcherDto);
+  ResearcherDto checkUserExistence(BasicResearcherInfoDto basicResearcherInfoDto);
 }

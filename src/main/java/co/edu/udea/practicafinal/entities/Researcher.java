@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -17,16 +18,17 @@ import java.util.List;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Document
 public class Researcher {
 
     @Id
-    @NotBlank private String id;
-    @NotBlank private String displayName;
-    @NotBlank private String email;
-    @NotBlank private String photoURl;
+     private String id;
+     private String displayName;
+     private String email;
+     private String photoURl;
+
      private String phoneNumber;
      private LocalDate dateOfEntry;
      private EnumRoles role;
-     private String careerName;
-     private String careerCode;
+     private Career career;
 }

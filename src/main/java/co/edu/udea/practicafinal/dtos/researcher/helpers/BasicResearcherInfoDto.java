@@ -1,5 +1,4 @@
-package co.edu.udea.practicafinal.dtos.helpers;
-
+package co.edu.udea.practicafinal.dtos.researcher.helpers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -14,9 +13,13 @@ import javax.validation.constraints.NotBlank;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class ObjectiveDto {
-    @NotBlank private String description;
-    @NotBlank private Boolean completed;
-
-
+public class BasicResearcherInfoDto {
+    @NotBlank
+    private String id;
+    @NotBlank
+    private String displayName;
+    @NotBlank
+    private String email;
+    @NotBlank
+    private String photoURL;
 }

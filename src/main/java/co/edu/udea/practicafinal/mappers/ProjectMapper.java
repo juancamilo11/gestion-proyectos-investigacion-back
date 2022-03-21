@@ -1,10 +1,9 @@
 package co.edu.udea.practicafinal.mappers;
 
-import co.edu.udea.practicafinal.dtos.ResearchProjectDto;
-import co.edu.udea.practicafinal.dtos.ResearcherDto;
-import co.edu.udea.practicafinal.dtos.helpers.ObjectiveDto;
-import co.edu.udea.practicafinal.dtos.helpers.ProjectDurationDto;
-import co.edu.udea.practicafinal.dtos.helpers.ProjectObjectiveDto;
+import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
+import co.edu.udea.practicafinal.dtos.researchproject.helpers.ObjectiveDto;
+import co.edu.udea.practicafinal.dtos.researchproject.helpers.ProjectDurationDto;
+import co.edu.udea.practicafinal.dtos.researchproject.helpers.ProjectObjectiveDto;
 import co.edu.udea.practicafinal.entities.ResearchProject;
 import co.edu.udea.practicafinal.entities.helpers.ProjectDuration;
 import co.edu.udea.practicafinal.entities.helpers.ProjectObjective;
@@ -37,7 +36,7 @@ public class ProjectMapper {
             .collect(Collectors.toList()))
           .build()
       )
-      .researcherList(researchProjectDto.getResearcherDtoList().stream().map(this.researcherMapper::mapFromDtoToEntity).collect(Collectors.toList()))
+      .researcherIdList(researchProjectDto.getResearcherIdList())
       .projectDuration(ProjectDuration.builder()
         .startingDate(researchProjectDto.getProjectDuration().getStartingDate())
         .endingDate(researchProjectDto.getProjectDuration().getEndingDate())
@@ -63,7 +62,7 @@ public class ProjectMapper {
             .collect(Collectors.toList()))
           .build()
       )
-      .researcherDtoList(researchProject.getResearcherList().stream().map(this.researcherMapper::mapFromEntityToDto).collect(Collectors.toList()))
+      .researcherIdList(researchProject.getResearcherIdList())
       .projectDuration(ProjectDurationDto.builder()
         .startingDate(researchProject.getProjectDuration().getStartingDate())
         .endingDate(researchProject.getProjectDuration().getEndingDate())

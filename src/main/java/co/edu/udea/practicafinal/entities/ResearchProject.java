@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 
@@ -22,11 +20,11 @@ import java.util.List;
 @Document
 public class ResearchProject {
     @Id
-    @NotBlank private String id;
-    @NotBlank private String name;
-    @NotBlank private Double budget;
-    @NotBlank private String description;
-    @NotBlank private ProjectObjective projectObjective;
-    @NotEmpty private List<Researcher> researcherList;
-    @NotEmpty private ProjectDuration projectDuration;
+    private String id;
+    private String name;
+    private Double budget;
+    private String description;
+    private ProjectObjective projectObjective;
+    private List<String> researcherIdList;
+    private ProjectDuration projectDuration;
 }

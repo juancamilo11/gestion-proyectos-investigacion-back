@@ -2,7 +2,7 @@ package co.edu.udea.practicafinal.entities.helpers;
 
 public enum EnumRoles {
   RESEARCHER("Investigador"),
-  RESEARCH_LEADER("Lider de Investigador"),
+  RESEARCH_LEADER("Lider de Investigacion"),
   ADMINISTRATOR("Administrador");
 
   private String description;
