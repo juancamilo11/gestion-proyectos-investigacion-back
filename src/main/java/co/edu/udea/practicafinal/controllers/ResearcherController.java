@@ -17,8 +17,8 @@ import java.util.logging.Level;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
 @RequiredArgsConstructor
 @Log
 public class ResearcherController {
@@ -38,12 +38,10 @@ public class ResearcherController {
     return new ResponseEntity<>(this.userService.getAllResearchersInfoByProjectId(projectId), HttpStatus.OK);
   }
 
-  @PostMapping("/get/user/email/{userEmail}")
+  @GetMapping("/get/user/email/{userEmail}")
   public ResponseEntity<ResearcherDto> getUserByEmail(@PathVariable String userEmail) {
     log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getUserByEmail del controlador Researcher " + userEmail);
     return new ResponseEntity<>(this.userService.getUserByEmail(userEmail), HttpStatus.OK);
   }
-
-
 
 }
