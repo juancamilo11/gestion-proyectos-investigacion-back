@@ -6,6 +6,7 @@ import co.edu.udea.practicafinal.dtos.researcher.helpers.CareerDto;
 import co.edu.udea.practicafinal.dtos.researcher.helpers.EnumRolesDto;
 import co.edu.udea.practicafinal.entities.ResearchProject;
 import co.edu.udea.practicafinal.entities.Researcher;
+import co.edu.udea.practicafinal.entities.helpers.EnumRoles;
 import co.edu.udea.practicafinal.mappers.ProjectMapper;
 import co.edu.udea.practicafinal.mappers.ResearcherMapper;
 import co.edu.udea.practicafinal.repositories.ProjectRepository;
@@ -96,5 +97,13 @@ public class UserServiceImpl implements UserService {
         return this.researcherMapper
                 .mapFromEntityToDto(this.researcherRepository
                         .findById(userId).orElse(Researcher.builder().build()));
+    }
+
+    @Override
+    public void changeUserRole(String userId, EnumRolesDto selectedRole) {
+        this.researcherRepository.findById(userId).ifPresent(researcher -> {
+            researcher.setRole(EnumRoles.valueOf(selectedRole.name()));
+            this.researcherRepository.save(researcher);
+        });
     }
 }

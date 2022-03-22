@@ -54,6 +54,23 @@ public class ResearcherController {
   @DeleteMapping("/delete/user/{userId}")
   public ResponseEntity<String> deleteUserById(@PathVariable String userId) {
     log.log(Level.INFO, "[ProjectController] Ingresando al metodo deleteUserById del controlador Project " + userId);
+    ResponseEntity<String> unAuthorizedResponse = executeUserEliminationProcess(userId);
+    if (unAuthorizedResponse != null) return unAuthorizedResponse;
+    this.userService.deleteUser(userId);
+    return new ResponseEntity<>("Se ha eliminado el usuario con éxito", HttpStatus.OK);
+  }
+
+
+  @PutMapping("/put/user/{userId}/role/{selectedRole}")
+  public ResponseEntity<String> changeUserRole(@PathVariable String userId, @PathVariable EnumRolesDto selectedRole) {
+    log.log(Level.INFO, "[ProjectController] Ingresando al metodo changeUserRole del controlador Project " + userId);
+    ResponseEntity<String> unAuthorizedResponse = executeUserEliminationProcess(userId);
+    if (unAuthorizedResponse != null) return unAuthorizedResponse;
+    this.userService.changeUserRole(userId, selectedRole);
+    return new ResponseEntity<>("Se ha actualizado el rol del usuario con éxito", HttpStatus.OK);
+  }
+
+  private ResponseEntity<String> executeUserEliminationProcess(String userId) {
     List<ResearchProjectDto> researchProjectDtoList = this.projectService.getAllProjectsByResearcherId(userId);
     ResearcherDto researcherDto = this.userService.getUserById(userId);
     if (researcherDto == null) return new ResponseEntity<>("El usuario con id " + userId + " no existe en la aplicación.", HttpStatus.NOT_FOUND);
@@ -62,7 +79,6 @@ public class ResearcherController {
     } else {
       this.projectService.deleteUserInProjects(researchProjectDtoList, userId);
     }
-    this.userService.deleteUser(userId);
-    return new ResponseEntity<>("Se ha eliminado el usuario con éxito", HttpStatus.OK);
+    return null;
   }
 }
