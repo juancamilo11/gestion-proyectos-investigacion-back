@@ -16,4 +16,6 @@ public interface ProjectService {
     String deleteResearchProject(String projectId);
 
     int deleteUserInProjects(List<ResearchProjectDto> researchProjectDtoList, String userId);
+
+    void deleteProjectsByLeaderId(List<ResearchProjectDto> researchProjectDtoList, String userId);
 }

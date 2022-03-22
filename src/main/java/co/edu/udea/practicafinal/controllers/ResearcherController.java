@@ -2,6 +2,7 @@ package co.edu.udea.practicafinal.controllers;
 
 import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
 import co.edu.udea.practicafinal.dtos.researcher.helpers.BasicResearcherInfoDto;
+import co.edu.udea.practicafinal.dtos.researcher.helpers.EnumRolesDto;
 import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.services.ProjectService;
 import co.edu.udea.practicafinal.services.UserService;
@@ -54,8 +55,14 @@ public class ResearcherController {
   public ResponseEntity<String> deleteUserById(@PathVariable String userId) {
     log.log(Level.INFO, "[ProjectController] Ingresando al metodo deleteUserById del controlador Project " + userId);
     List<ResearchProjectDto> researchProjectDtoList = this.projectService.getAllProjectsByResearcherId(userId);
-    this.projectService.deleteUserInProjects(researchProjectDtoList, userId);
+    ResearcherDto researcherDto = this.userService.getUserById(userId);
+    if (researcherDto == null) return new ResponseEntity<>("El usuario con id " + userId + " no existe en la aplicación.", HttpStatus.NOT_FOUND);
+    if(researcherDto.getRole().equals(EnumRolesDto.RESEARCH_LEADER)) {
+      this.projectService.deleteProjectsByLeaderId(researchProjectDtoList, userId);
+    } else {
+      this.projectService.deleteUserInProjects(researchProjectDtoList, userId);
+    }
     this.userService.deleteUser(userId);
-    return new ResponseEntity<>("Deleted user in research projects", HttpStatus.OK);
+    return new ResponseEntity<>("Se ha eliminado el usuario con éxito", HttpStatus.OK);
   }
 }

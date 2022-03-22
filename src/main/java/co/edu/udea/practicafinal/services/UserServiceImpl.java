@@ -90,4 +90,11 @@ public class UserServiceImpl implements UserService {
         this.researcherRepository.deleteById(userId);
         return "Project deleted.";
     }
+
+    @Override
+    public ResearcherDto getUserById(String userId) {
+        return this.researcherMapper
+                .mapFromEntityToDto(this.researcherRepository
+                        .findById(userId).orElse(Researcher.builder().build()));
+    }
 }

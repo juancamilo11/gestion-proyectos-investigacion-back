@@ -75,6 +75,11 @@ public class ProjectServicesImpl implements ProjectService {
         }).collect(Collectors.toList()).size();
     }
 
+    @Override
+    public void deleteProjectsByLeaderId(List<ResearchProjectDto> researchProjectDtoList, String userId) {
+         researchProjectDtoList.forEach(researchProjectDto -> this.projectRepository.deleteById(researchProjectDto.getId()));
+    }
+
 //    public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
 //
 //        Optional<ResearchProject> projectOptional = this.projectRepository

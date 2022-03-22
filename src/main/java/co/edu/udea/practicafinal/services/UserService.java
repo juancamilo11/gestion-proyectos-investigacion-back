@@ -16,4 +16,6 @@ public interface UserService {
   List<ResearcherDto> getAllUsers();
 
   String deleteUser(String userId);
+
+  ResearcherDto getUserById(String userId);
 }
