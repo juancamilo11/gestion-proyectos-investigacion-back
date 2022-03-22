@@ -34,6 +34,7 @@ public class ResearcherMapper {
                 .basicResearcherInfo(BasicResearcherInfoDto.builder()
                         .id(researcher.getId())
                         .displayName(researcher.getDisplayName())
+                        .photoURL(researcher.getPhotoURl())
                         .email(researcher.getEmail())
                         .build())
                 .phoneNumber(researcher.getPhoneNumber())
