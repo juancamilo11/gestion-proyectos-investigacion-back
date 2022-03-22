@@ -18,6 +18,7 @@ import java.util.logging.Level;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @Log
 public class ResearcherController {
@@ -31,10 +32,18 @@ public class ResearcherController {
     return new ResponseEntity<>(this.userService.checkUserExistence(basicResearcherInfoDto), HttpStatus.OK);
   }
 
-  @GetMapping("/get/users/project/{projectId}")
-  public ResponseEntity<List<ResearcherDto>> getAllResearchersByProjectId(@PathVariable String projectId) {
-    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllResearchersByProjectId del controlador Researcher con Id" + projectId);
-    return new ResponseEntity<>(this.projectService.getAllResearchersByProjectId(projectId), HttpStatus.OK);
+  @GetMapping("/get/users/{projectId}")
+  public ResponseEntity<List<ResearcherDto>> getAllResearchersInfoByProjectId(@PathVariable String projectId) {
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllResearchersInfoByProjectId del controlador Researcher con ProjectId" + projectId);
+    return new ResponseEntity<>(this.userService.getAllResearchersInfoByProjectId(projectId), HttpStatus.OK);
   }
+
+  @PostMapping("/get/user/email/{userEmail}")
+  public ResponseEntity<ResearcherDto> getUserByEmail(@PathVariable String userEmail) {
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getUserByEmail del controlador Researcher " + userEmail);
+    return new ResponseEntity<>(this.userService.getUserByEmail(userEmail), HttpStatus.OK);
+  }
+
+
 
 }

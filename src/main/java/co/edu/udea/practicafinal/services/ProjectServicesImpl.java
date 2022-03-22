@@ -30,35 +30,6 @@ public class ProjectServicesImpl implements ProjectService {
     private final ResearcherRepository researcherRepository;
     private final ResearcherMapper researcherMapper;
 
-    @Override
-    public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
-
-        Optional<ResearchProject> projectOptional = this.projectRepository
-              .findById(projectId);
-
-        return projectOptional.map(researchProject -> researchProject.getResearcherIdList()
-                        .stream()
-                        .map(researcherId -> {
-                            Optional<Researcher> researcherOptional = this.researcherRepository.findById(researcherId);
-                            return researcherOptional.map(researcher -> ResearcherDto.builder()
-                                    .basicResearcherInfo(BasicResearcherInfoDto.builder()
-                                            .id(researcher.getId())
-                                            .displayName(researcher.getDisplayName())
-                                            .email(researcher.getEmail())
-                                            .photoURL(researcher.getPhotoURl())
-                                            .build())
-                                    .phoneNumber(researcher.getPhoneNumber())
-                                    .dateOfEntry(researcher.getDateOfEntry())
-                                    .role(EnumRolesDto.valueOf(researcher.getRole().getDescription()))
-                                    .career(CareerDto.builder()
-                                            .name(researcher.getCareer().getName())
-                                            .code(researcher.getCareer().getCode())
-                                            .build())
-                                    .build()).orElse(null);
-                        }).collect(Collectors.toList()))
-                .orElse(Collections.emptyList());
-
-    }
 
     @Override
     public List<ResearchProjectDto> getAllProjectsByResearcherId(String researcherId) {
@@ -75,4 +46,34 @@ public class ProjectServicesImpl implements ProjectService {
                 .mapFromEntityToDto(this.projectRepository
                         .save(this.projectMapper.mapFromDtoToEntity(researchProjectDto)));
     }
+
+//    public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
+//
+//        Optional<ResearchProject> projectOptional = this.projectRepository
+//                .findById(projectId);
+//
+//        return projectOptional.map(researchProject -> researchProject.getResearcherIdList()
+//                        .stream()
+//                        .map(researcherId -> {
+//                            Optional<Researcher> researcherOptional = this.researcherRepository.findById(researcherId);
+//                            return researcherOptional.map(researcher -> ResearcherDto.builder()
+//                                    .basicResearcherInfo(BasicResearcherInfoDto.builder()
+//                                            .id(researcher.getId())
+//                                            .displayName(researcher.getDisplayName())
+//                                            .email(researcher.getEmail())
+//                                            .photoURL(researcher.getPhotoURl())
+//                                            .build())
+//                                    .phoneNumber(researcher.getPhoneNumber())
+//                                    .dateOfEntry(researcher.getDateOfEntry())
+//                                    .role(EnumRolesDto.valueOf(researcher.getRole().getDescription()))
+//                                    .career(CareerDto.builder()
+//                                            .name(researcher.getCareer().getName())
+//                                            .code(researcher.getCareer().getCode())
+//                                            .build())
+//                                    .build()).orElse(null);
+//                        }).collect(Collectors.toList()))
+//                .orElse(Collections.emptyList());
+//
+//    }
+
 }
