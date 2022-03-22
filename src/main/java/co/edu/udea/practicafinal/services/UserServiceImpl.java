@@ -75,4 +75,19 @@ public class UserServiceImpl implements UserService {
                 .mapFromEntityToDto(this.researcherRepository
                         .findByEmail(userEmail).orElse(Researcher.builder().build()));
     }
+
+    @Override
+    public List<ResearcherDto> getAllUsers() {
+        List<Researcher> researcherList = new ArrayList<>();
+        this.researcherRepository.findAll().forEach(researcherList::add);
+        return researcherList.stream()
+                .map(this.researcherMapper::mapFromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String deleteUser(String userId) {
+        this.researcherRepository.deleteById(userId);
+        return "Project deleted.";
+    }
 }

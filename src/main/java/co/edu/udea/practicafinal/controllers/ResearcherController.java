@@ -17,8 +17,8 @@ import java.util.logging.Level;
 
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "http://localhost:3000/")
-@CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
+@CrossOrigin(origins = "http://localhost:3000/")
+//@CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
 @RequiredArgsConstructor
 @Log
 public class ResearcherController {
@@ -44,4 +44,18 @@ public class ResearcherController {
     return new ResponseEntity<>(this.userService.getUserByEmail(userEmail), HttpStatus.OK);
   }
 
+  @GetMapping("/get/users")
+  public ResponseEntity<List<ResearcherDto>> getAllusers() {
+    log.log(Level.INFO, "[ResearcherController] Ingresando al metodo getAllusers del controlador Researcher con ProjectId");
+    return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
+  }
+
+  @DeleteMapping("/delete/user/{userId}")
+  public ResponseEntity<String> deleteUserById(@PathVariable String userId) {
+    log.log(Level.INFO, "[ProjectController] Ingresando al metodo deleteUserById del controlador Project " + userId);
+    List<ResearchProjectDto> researchProjectDtoList = this.projectService.getAllProjectsByResearcherId(userId);
+    this.projectService.deleteUserInProjects(researchProjectDtoList, userId);
+    this.userService.deleteUser(userId);
+    return new ResponseEntity<>("Deleted user in research projects", HttpStatus.OK);
+  }
 }

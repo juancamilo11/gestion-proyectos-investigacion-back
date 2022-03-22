@@ -12,4 +12,8 @@ public interface UserService {
   List<ResearcherDto> getAllResearchersInfoByProjectId(String projectId);
 
   ResearcherDto getUserByEmail(String userEmail);
+
+  List<ResearcherDto> getAllUsers();
+
+  String deleteUser(String userId);
 }

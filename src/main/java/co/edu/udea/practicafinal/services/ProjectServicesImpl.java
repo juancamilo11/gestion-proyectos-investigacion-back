@@ -47,6 +47,34 @@ public class ProjectServicesImpl implements ProjectService {
                         .save(this.projectMapper.mapFromDtoToEntity(researchProjectDto)));
     }
 
+    @Override
+    public List<ResearchProjectDto> getAllProjects() {
+        List<ResearchProject> researchProjectList = new ArrayList<>();
+        this.projectRepository.findAll().forEach(researchProjectList::add);
+        return researchProjectList.stream()
+                .map(this.projectMapper::mapFromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String deleteResearchProject(String projectId) {
+        this.projectRepository.deleteById(projectId);
+        return "Project deleted.";
+    }
+
+    @Override
+    public int deleteUserInProjects(List<ResearchProjectDto> researchProjectDtoList, String userId) {
+        return researchProjectDtoList.stream().map(researchProjectDto -> {
+            Optional<ResearchProject> researchProjectOptional = this.projectRepository.findById(researchProjectDto.getId());
+            return researchProjectOptional.stream().map(researchProject -> {
+                List<String> researcherIdList = researchProject.getResearcherIdList();
+                researcherIdList.remove(userId);
+                researchProject.setResearcherIdList(researcherIdList);
+                return this.projectRepository.save(researchProject);
+            }).collect(Collectors.toList()).size();
+        }).collect(Collectors.toList()).size();
+    }
+
 //    public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
 //
 //        Optional<ResearchProject> projectOptional = this.projectRepository
