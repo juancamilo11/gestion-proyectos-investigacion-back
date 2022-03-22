@@ -14,8 +14,8 @@ import java.util.logging.Level;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "http://localhost:3000/")
-//@CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
+//@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
 @RequiredArgsConstructor
 @Log
 public class ProjectController {
