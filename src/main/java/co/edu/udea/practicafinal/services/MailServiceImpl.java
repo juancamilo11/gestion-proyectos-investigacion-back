@@ -14,17 +14,7 @@ public class MailServiceImpl implements MailService{
     private String from;
     private final JavaMailSender javaMailSender;
 
-    public static void main(String[] args) {
-        sendMessageToUserAddedToResearchProjectTest("joanri2020@gmail.com",ResearchProjectDto.builder().name("proyecto pruebas").build());
-    }
 
-    public static void sendMessageToUserAddedToResearchProjectTest(String to, ResearchProjectDto researchProjectDto) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("gestion.proyectos.inv.udea@gmail.com");
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject("¡Saludos, Bienvenido al proyecto de investicación: "+researchProjectDto.getName()+"!");
-        simpleMailMessage.setText("Ya haces parte de nuestro proyecto de investigación, visita este enlace para obtener mas información: https://gestion-proyectos-inv-udea.web.app/");
-    }
     @Override
     public void sendMessageToUserAddedToResearchProject(String to, ResearchProjectDto researchProjectDto) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -32,6 +22,7 @@ public class MailServiceImpl implements MailService{
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject("¡Saludos, Bienvenido al proyecto de investicación: "+researchProjectDto.getName()+"!");
         simpleMailMessage.setText("Ya haces parte de nuestro proyecto de investigación, visita este enlace para obtener mas información: https://gestion-proyectos-inv-udea.web.app/");
+        javaMailSender.send(simpleMailMessage);
     }
 
 
@@ -43,5 +34,6 @@ public class MailServiceImpl implements MailService{
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject("¡Se te ha retirado del proyecto de investicación: "+researchProjectDto.getName()+"!");
         simpleMailMessage.setText("Ya no perteneces al proyecto de investigación");
+        javaMailSender.send(simpleMailMessage);
     }
 }

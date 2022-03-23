@@ -61,7 +61,7 @@ public class ProjectServicesImpl implements ProjectService {
         researcherIdList.forEach(id -> {
             Optional<Researcher> researcherOptional = this.researcherRepository.findById(id);
             researcherOptional.ifPresent(researcher -> {
-                this.mailService.sendMessageToUserDeletedFromResearchProject(researcher.getEmail(), researchProjectDto);
+                this.mailService.sendMessageToUserAddedToResearchProject(researcher.getEmail(), researchProjectDto);
             });
         });
     }
