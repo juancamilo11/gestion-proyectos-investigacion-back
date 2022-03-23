@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @Validated
 @RequiredArgsConstructor
 public class ProjectServicesImpl implements ProjectService {
+    private final MailService mailService;
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
     private final ResearcherRepository researcherRepository;
@@ -42,9 +43,55 @@ public class ProjectServicesImpl implements ProjectService {
 
     @Override
     public ResearchProjectDto createNewProject(ResearchProjectDto researchProjectDto) {
+        List<String> updatedResearcherIdList = researchProjectDto.getResearcherIdList();
+        Optional<ResearchProject> researchProjectOptional = this.projectRepository.findById(researchProjectDto.getId());
+        if (researchProjectOptional.isPresent()) {
+            sendMessageToDeletedUsers(researchProjectDto, updatedResearcherIdList, researchProjectOptional);
+            sendMessageToAddedUsers(researchProjectDto, updatedResearcherIdList, researchProjectOptional);
+        } else {
+            sendMessageToAllUsers(researchProjectDto);
+        }
         return this.projectMapper
                 .mapFromEntityToDto(this.projectRepository
                         .save(this.projectMapper.mapFromDtoToEntity(researchProjectDto)));
+    }
+
+    private void sendMessageToAllUsers(ResearchProjectDto researchProjectDto) {
+        List<String> researcherIdList = researchProjectDto.getResearcherIdList();
+        researcherIdList.forEach(id -> {
+            Optional<Researcher> researcherOptional = this.researcherRepository.findById(id);
+            researcherOptional.ifPresent(researcher -> {
+                this.mailService.sendMessageToUserDeletedFromResearchProject(researcher.getEmail(), researchProjectDto);
+            });
+        });
+    }
+
+    private void sendMessageToDeletedUsers(ResearchProjectDto researchProjectDto, List<String> updatedResearcherIdList, Optional<ResearchProject> researchProjectOptional) {
+        researchProjectOptional.ifPresent(researchProject -> {
+            List<String> researcherIdList = researchProject.getResearcherIdList();
+            researcherIdList.forEach(id -> {
+                Optional<Researcher> researcherOptional = this.researcherRepository.findById(id);
+                if (updatedResearcherIdList.stream().noneMatch(actualId -> actualId.equalsIgnoreCase(id))) {
+                    researcherOptional.ifPresent(researcher -> {
+                        this.mailService.sendMessageToUserDeletedFromResearchProject(researcher.getEmail(), researchProjectDto);
+                    });
+                }
+            });
+        });
+    }
+
+    private void sendMessageToAddedUsers(ResearchProjectDto researchProjectDto, List<String> updatedResearcherIdList, Optional<ResearchProject> researchProjectOptional) {
+        researchProjectOptional.ifPresent(researchProject -> {
+            List<String> oldResearcherIdList = researchProject.getResearcherIdList();
+            updatedResearcherIdList.forEach(id -> {
+                Optional<Researcher> researcherOptional = this.researcherRepository.findById(id);
+                if (oldResearcherIdList.stream().noneMatch(actualId -> actualId.equalsIgnoreCase(id))) {
+                    researcherOptional.ifPresent(researcher -> {
+                        this.mailService.sendMessageToUserAddedToResearchProject(researcher.getEmail(), researchProjectDto);
+                    });
+                }
+            });
+        });
     }
 
     @Override
@@ -77,7 +124,7 @@ public class ProjectServicesImpl implements ProjectService {
 
     @Override
     public void deleteProjectsByLeaderId(List<ResearchProjectDto> researchProjectDtoList, String userId) {
-         researchProjectDtoList.forEach(researchProjectDto -> this.projectRepository.deleteById(researchProjectDto.getId()));
+        researchProjectDtoList.forEach(researchProjectDto -> this.projectRepository.deleteById(researchProjectDto.getId()));
     }
 
 //    public List<ResearcherDto> getAllResearchersByProjectId(String projectId) {
