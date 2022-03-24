@@ -1,6 +1,5 @@
 package co.edu.udea.practicafinal.dtos.researchproject.helpers;
 
-import co.edu.udea.practicafinal.dtos.researchproject.helpers.ObjectiveDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

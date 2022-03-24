@@ -6,7 +6,6 @@ import co.edu.udea.practicafinal.dtos.researcher.helpers.EnumRolesDto;
 import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.services.ProjectService;
 import co.edu.udea.practicafinal.services.UserService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,6 @@ import java.util.logging.Level;
 
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "http://localhost:3000/")
 @CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
 @RequiredArgsConstructor
 @Log
@@ -26,7 +24,7 @@ public class ResearcherController {
   private final UserService userService;
   private final ProjectService projectService;
 
-  //En uso
+
   @PostMapping("/post/user")
   public ResponseEntity<ResearcherDto> checkUserExistence(@RequestBody BasicResearcherInfoDto basicResearcherInfoDto) {
     log.log(Level.INFO, "[ResearcherController] Ingresando al metodo createNewUser del controlador Researcher " + basicResearcherInfoDto);

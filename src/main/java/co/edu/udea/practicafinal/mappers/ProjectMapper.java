@@ -4,10 +4,10 @@ import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.dtos.researchproject.helpers.ObjectiveDto;
 import co.edu.udea.practicafinal.dtos.researchproject.helpers.ProjectDurationDto;
 import co.edu.udea.practicafinal.dtos.researchproject.helpers.ProjectObjectiveDto;
+import co.edu.udea.practicafinal.entities.Objective;
 import co.edu.udea.practicafinal.entities.ResearchProject;
 import co.edu.udea.practicafinal.entities.helpers.ProjectDuration;
 import co.edu.udea.practicafinal.entities.helpers.ProjectObjective;
-import co.edu.udea.practicafinal.entities.Objective;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

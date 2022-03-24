@@ -1,9 +1,5 @@
 package co.edu.udea.practicafinal.services;
 
-import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
-import co.edu.udea.practicafinal.dtos.researcher.helpers.BasicResearcherInfoDto;
-import co.edu.udea.practicafinal.dtos.researcher.helpers.CareerDto;
-import co.edu.udea.practicafinal.dtos.researcher.helpers.EnumRolesDto;
 import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.entities.ResearchProject;
 import co.edu.udea.practicafinal.entities.Researcher;
@@ -16,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

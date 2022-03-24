@@ -1,6 +1,5 @@
 package co.edu.udea.practicafinal.controllers;
 
-import co.edu.udea.practicafinal.dtos.researcher.ResearcherDto;
 import co.edu.udea.practicafinal.dtos.researchproject.ResearchProjectDto;
 import co.edu.udea.practicafinal.services.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -22,24 +21,43 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
+    /**
+     * Metodo obtiene todos los proyectos de un investigador
+     * @param researcherId Recibe el Id del investigador
+     * @return retorna todos los proyectos relacionado a un investigador
+     */
     @GetMapping("/get/projects/user/{researcherId}")
     public ResponseEntity<List<ResearchProjectDto>> getAllProjectsByResearcherId(@PathVariable String researcherId) {
         log.log(Level.INFO, "[ProjectController] Ingresando al metodo getAllProjectsByResearcherId del controlador Project " + researcherId);
         return new ResponseEntity<>(this.projectService.getAllProjectsByResearcherId(researcherId), HttpStatus.OK);
     }
 
+    /**
+     * Metodo para crear un nuevo proyecto de investigación
+     * @param researchProjectDto Recibe el objeto de tipo Dto(Transferencia de datos) del proyecto a guardar
+     * @return Retorna el proyecto almacenado
+     */
     @PostMapping("/post/project")
     public ResponseEntity<ResearchProjectDto> createNewProject(@RequestBody ResearchProjectDto researchProjectDto) {
         log.log(Level.INFO, "[ProjectController] Ingresando al metodo createNewProject del controlador Project " + researchProjectDto);
         return new ResponseEntity<>(this.projectService.createNewProject(researchProjectDto), HttpStatus.OK);
     }
 
+    /**
+     * Metodo para obtener todos los proyectos almacenados
+     * @return retorna todos los proyectos almacenados
+     */
     @GetMapping("/get/projects")
     public ResponseEntity<List<ResearchProjectDto>> getAllProjects() {
         log.log(Level.INFO, "[ProjectController] Ingresando al metodo getAllProjects del controlador Project ");
         return new ResponseEntity<>(this.projectService.getAllProjects(), HttpStatus.OK);
     }
 
+    /**
+     *Metodo para eliminar el proyecto por medio de su Id
+     * @param projectId Recibe parametro con el Id del proyecto
+     * @return void
+     */
     @DeleteMapping("/delete/project/{projectId}")
     public ResponseEntity<String> deleteResearchProjectById(@PathVariable String projectId) {
         log.log(Level.INFO, "[ProjectController] Ingresando al metodo deleteResearchProjectById del controlador Project " + projectId);

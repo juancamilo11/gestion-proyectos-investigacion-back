@@ -9,9 +9,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
+/**
+ * Clase de transferencia de datos (Dto) para la entidad investigador
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @Builder(toBuilder = true)
