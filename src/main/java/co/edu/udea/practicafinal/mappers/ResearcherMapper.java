@@ -28,7 +28,7 @@ public class ResearcherMapper {
                 .email(researcherDto.getBasicResearcherInfo().getEmail())
                 .photoURl(researcherDto.getBasicResearcherInfo().getPhotoURL())
                 .phoneNumber(researcherDto.getPhoneNumber())
-                .role(EnumRoles.valueOf(researcherDto.getRole().getDescription()))
+                .role(EnumRoles.valueOf(researcherDto.getRole().name()))
                 .dateOfEntry(researcherDto.getDateOfEntry())
                 .career(Career.builder()
                         .name(researcherDto.getCareer().getName())
