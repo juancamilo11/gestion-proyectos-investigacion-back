@@ -68,6 +68,13 @@ public class ResearcherController {
     return new ResponseEntity<>("Se ha actualizado el rol del usuario con éxito", HttpStatus.OK);
   }
 
+  @PutMapping("/put/user")
+  public ResponseEntity<ResearcherDto> changeUserInfo(@RequestBody ResearcherDto researcherDto) {
+    log.log(Level.INFO, "[ProjectController] Ingresando al metodo changeUserInfo del controlador Project " + researcherDto.getBasicResearcherInfo().getId());
+    return new ResponseEntity<>(this.userService.updateUserInfo(researcherDto), HttpStatus.OK);
+  }
+
+
   private ResponseEntity<String> executeUserEliminationProcess(String userId) {
     List<ResearchProjectDto> researchProjectDtoList = this.projectService.getAllProjectsByResearcherId(userId);
     ResearcherDto researcherDto = this.userService.getUserById(userId);

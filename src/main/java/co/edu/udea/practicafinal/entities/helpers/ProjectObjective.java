@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Clase Entidad, modelo para los atributos de la entidad objetivo del proyecto
+ */
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 /**
- * Clase de transferencia de datos (Dto) para la entidad investigador
+ * Clase de transferencia de datos (Dto) para contener la información de la entidad investigador
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data

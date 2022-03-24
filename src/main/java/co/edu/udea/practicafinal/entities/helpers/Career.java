@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Clase Entidad, modelo para los atributos de la entidad carrera
+ */
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor

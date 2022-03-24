@@ -11,8 +11,16 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+/**
+ * Clase que sirve para la conversión de las entidades a Dto y viceversa de la clase investigador
+ */
 @Component
 public class ResearcherMapper {
+    /**
+     * Metodo para la conversión de un objeto de tipo Dto a Tipo Entidad de la clase investigador
+     * @param researcherDto recibe el objeto de tipo Dto a transformar
+     * @return retorna un objeto de tipo entidad
+     */
     public Researcher mapFromDtoToEntity(ResearcherDto researcherDto) {
         return Researcher.builder()
                 .id(researcherDto.getBasicResearcherInfo().getId())
@@ -29,6 +37,11 @@ public class ResearcherMapper {
                 .build();
     }
 
+    /**
+     * Metodo para la conversión de un objeto de tipo Entidad a Tipo Dto de la clase proyecto de investigación
+     * @param researcher recibe el objeto de tipo Entidad a transformar
+     * @return retorna un objeto de tipo Dto
+     */
     public ResearcherDto mapFromEntityToDto(Researcher researcher) {
         return ResearcherDto.builder()
                 .basicResearcherInfo(BasicResearcherInfoDto.builder()
@@ -47,6 +60,11 @@ public class ResearcherMapper {
                 .build();
     }
 
+    /**
+     * Metodo para la conversion de un objeto de Tipo Dto a tipo Entidad de la clase informacion basica del investigador
+     * @param basicResearcherInfoDto  recibe el objeto de tipo Dto a transformar
+     * @return retorna un objeto de tipo Entidad
+     */
     public Researcher mapFromDtoToEntity(BasicResearcherInfoDto basicResearcherInfoDto) {
         return Researcher.builder()
                 .id(basicResearcherInfoDto.getId())

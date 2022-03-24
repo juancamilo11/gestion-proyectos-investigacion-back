@@ -12,7 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-
+/**
+ * Clase Entidad, modelo para los atributos de la entidad proyecto de investigación
+ */
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor

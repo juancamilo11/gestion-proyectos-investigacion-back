@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserService {
 
+  ResearcherDto updateUserInfo(ResearcherDto researcherDto);
+
   ResearcherDto checkUserExistence(BasicResearcherInfoDto basicResearcherInfoDto);
 
   List<ResearcherDto> getAllResearchersInfoByProjectId(String projectId);
