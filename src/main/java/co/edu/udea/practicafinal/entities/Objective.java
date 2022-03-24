@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase Entidad, modelo para los atributos de la entidad Objetivo general del proyecto
+ */
 
 @Data
 @Builder(toBuilder = true)

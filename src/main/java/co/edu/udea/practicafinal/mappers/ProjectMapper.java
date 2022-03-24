@@ -12,12 +12,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
-
+/**
+ * Clase que sirve para la conversión de las entidades a Dto y viceversa de la clase proyecto de investigador
+ */
 @RequiredArgsConstructor
 @Component
 public class ProjectMapper {
   private final ResearcherMapper researcherMapper;
 
+  /**
+   * Metodo para la conversión de un objeto de tipo Dto a Tipo Entidad de la clase proyecto de investigación
+   * @param researchProjectDto recibe el objeto de tipo Dto a transformar
+   * @return retorna un objeto de tipo entidad
+   */
   public ResearchProject mapFromDtoToEntity(ResearchProjectDto researchProjectDto) {
     return ResearchProject.builder()
       .id(researchProjectDto.getId())
@@ -44,6 +51,11 @@ public class ProjectMapper {
       .build();
   }
 
+  /**
+   * Metodo para la conversión de un objeto de tipo Entidad a Tipo Dto de la clase proyecto de investigación
+   * @param researchProject recibe el objeto de tipo Entidad a transformar
+   * @return retorna un objeto de tipo Dto
+   */
   public ResearchProjectDto mapFromEntityToDto(ResearchProject researchProject) {
     return ResearchProjectDto.builder()
       .id(researchProject.getId())

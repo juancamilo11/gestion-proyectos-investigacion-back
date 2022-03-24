@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Clase de Transferencia de datos (Dto) para contener la información basica de la entidad del Investigador
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @Builder(toBuilder = true)

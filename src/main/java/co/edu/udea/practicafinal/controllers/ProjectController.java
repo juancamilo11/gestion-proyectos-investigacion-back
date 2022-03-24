@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Clase controller para la comunicación con el Front
+ */
+
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "http://localhost:3000/")
 @CrossOrigin(origins = "https://gestion-proyectos-inv-udea.web.app/")
 @RequiredArgsConstructor
 @Log
@@ -24,7 +27,7 @@ public class ProjectController {
     /**
      * Metodo obtiene todos los proyectos de un investigador
      * @param researcherId Recibe el Id del investigador
-     * @return retorna todos los proyectos relacionado a un investigador
+     * @return ResponseEntity<List<ResearchProjectDto>> retorna todos los proyectos relacionado a un investigador
      */
     @GetMapping("/get/projects/user/{researcherId}")
     public ResponseEntity<List<ResearchProjectDto>> getAllProjectsByResearcherId(@PathVariable String researcherId) {
@@ -35,7 +38,7 @@ public class ProjectController {
     /**
      * Metodo para crear un nuevo proyecto de investigación
      * @param researchProjectDto Recibe el objeto de tipo Dto(Transferencia de datos) del proyecto a guardar
-     * @return Retorna el proyecto almacenado
+     * @return ResponseEntity<ResearchProjectDto> Retorna el proyecto almacenado
      */
     @PostMapping("/post/project")
     public ResponseEntity<ResearchProjectDto> createNewProject(@RequestBody ResearchProjectDto researchProjectDto) {
@@ -45,7 +48,7 @@ public class ProjectController {
 
     /**
      * Metodo para obtener todos los proyectos almacenados
-     * @return retorna todos los proyectos almacenados
+     * @return ResponseEntity<List<ResearchProjectDto>> retorna todos los proyectos almacenados
      */
     @GetMapping("/get/projects")
     public ResponseEntity<List<ResearchProjectDto>> getAllProjects() {

@@ -33,7 +33,16 @@ public class UserServiceImpl implements UserService {
   private final ProjectMapper projectMapper;
 
 
-  @Override
+    @Override
+    public ResearcherDto updateUserInfo(ResearcherDto researcherDto) {
+        Optional<Researcher> researcherOptional = this.researcherRepository.findById(researcherDto.getBasicResearcherInfo().getId());
+        return researcherOptional.map(researcher -> {
+           Researcher researcherUpdated= this.researcherMapper.mapFromDtoToEntity(researcherDto);
+           return this.researcherMapper.mapFromEntityToDto(this.researcherRepository.save(researcherUpdated));
+        }).orElseThrow();
+    }
+
+    @Override
   public ResearcherDto checkUserExistence(BasicResearcherInfoDto basicResearcherInfoDto) {
     Optional<Researcher> researcherOptional = this.researcherRepository.findById(basicResearcherInfoDto.getId());
 

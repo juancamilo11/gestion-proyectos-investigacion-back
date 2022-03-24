@@ -12,7 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-
+/**
+ * Clase Entidad, modelo para los atributos de la entidad investigador
+ */
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor

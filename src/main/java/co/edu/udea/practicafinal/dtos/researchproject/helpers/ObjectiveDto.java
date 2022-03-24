@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Clase de Tranferencia de Datos (Dto) para contener la informacion de los objetivos generales del proyecto de investigación
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @Builder(toBuilder = true)
